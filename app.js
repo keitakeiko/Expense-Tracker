@@ -2,6 +2,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+
 const Expense = require('./models/expense') // 載入 Expense model
 
 const app = express()
@@ -33,6 +34,9 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 // 啟用樣版引擎
 app.set('view engine', 'handlebars')
 
+// 所有路由都會先經過 app.use
+app.use(express.urlencoded({ extended: true }))
+
 
 // 設定首頁路由
 app.get('/', (req, res) => {
@@ -42,6 +46,16 @@ app.get('/', (req, res) => {
     .catch(error => console.log(error)) // 錯誤處理
 })
 
+// 新增資料功能
+app.get('/expenses/new', (req, res) => {
+  return res.render('new')
+})
+app.post('/expenses', (req, res) => {
+  const { name } = req.body // 從 req.body 拿出表單裡的資料
+  return Expense.create({ name }) // 存入資料庫
+  .then(() => res.redirect('/'))  // 新增完成後導回首頁
+  .catch(error => console.log(error))
+})
 
 // 設定 port 
 app.listen(port, () => {
