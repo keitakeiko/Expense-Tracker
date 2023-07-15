@@ -3,6 +3,7 @@
   {{#each expenses}}
     <li>
       {{ this.name }}
+      <a href="/expenses/{{ this._id }}">detail</a>
     </li>
   {{/each}}
 </ul>

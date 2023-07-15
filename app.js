@@ -57,6 +57,15 @@ app.post('/expenses', (req, res) => {
   .catch(error => console.log(error))
 })
 
+// 瀏覽特定頁面
+app.get('/expenses/:id', (req, res) => {
+  const _id = req.params.id
+  return Expense.findById(_id)
+    .lean()
+    .then(expense => res.render('detail', { expense }))
+    .catch( error => console.log(error))
+})
+
 // 設定 port 
 app.listen(port, () => {
   console.log('Express is running on http://localhost:3000')
