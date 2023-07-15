@@ -7,17 +7,17 @@ const expenseSchema = new Schema({
   amount: {
     type: Number
   },
-  userId: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    index: true,
-    required: true
-  },
-  categoryId: {
-    type: Schema.Types.objectId,
-    ref: 'Category',
-    required: true
-  },
+  // userId: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'User',
+  //   index: true,
+  //   required: true
+  // },
+  // categoryId: {
+  //   type: Schema.Types.objectId,
+  //   ref: 'Category',
+  //   required: true
+  // },
   createdAt: {
     type: Date,
     default: Date.now
