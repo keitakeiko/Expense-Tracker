@@ -2,6 +2,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+const Expense = require('./models/expense') // 載入 Expense model
 
 const app = express()
 const port = 3000
@@ -35,7 +36,10 @@ app.set('view engine', 'handlebars')
 
 // 設定首頁路由
 app.get('/', (req, res) => {
-  res.render('index')
+  Expense.find() // 取出 Expense model 裡的所有資料
+    .lean() // 把 MongoDB 的 Model 物件轉換成乾淨的 JS 資料陣列
+    .then( expenses => res.render('index', { expenses })) // 將資料傳給 index 樣板
+    .catch(error => console.log(error)) // 錯誤處理
 })
 
 
