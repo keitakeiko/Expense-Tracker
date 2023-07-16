@@ -51,8 +51,8 @@ app.get('/expenses/new', (req, res) => {
   return res.render('new')
 })
 app.post('/expenses', (req, res) => {
-  const { name } = req.body // 從 req.body 拿出表單裡的資料
-  return Expense.create({ name }) // 存入資料庫
+  const expenseCreate = req.body // 從 req.body 拿出表單裡的資料
+  return Expense.create( expenseCreate ) // 存入資料庫
   .then(() => res.redirect('/'))  // 新增完成後導回首頁
   .catch(error => console.log(error))
 })
@@ -64,6 +64,26 @@ app.get('/expenses/:id', (req, res) => {
     .lean()
     .then(expense => res.render('detail', { expense }))
     .catch( error => console.log(error))
+})
+
+// 修改特定頁面資料
+app.get('/expenses/:id/edit', (req, res) => {
+  const _id = req.params.id
+  return Expense.findById(_id)
+    .lean()
+    .then(expense => res.render('edit', { expense}))
+    .catch(error => console.log(error))
+})
+app.post('/expenses/:id/edit', (req, res) => {
+  const _id = req.params.id
+  const { name }= req.body
+  Expense.findById(_id)
+    .then( expense => {
+      expense.name = name
+      return  expense.save()
+    })
+      .then(() => res.redirect(`/expenses/${_id}`))
+      .catch(error => console.log(error))
 })
 
 // 設定 port 
