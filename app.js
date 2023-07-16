@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
     .catch(error => console.log(error)) // 錯誤處理
 })
 
-// 新增資料功能
+// create
 app.get('/expenses/new', (req, res) => {
   return res.render('new')
 })
@@ -57,7 +57,7 @@ app.post('/expenses', (req, res) => {
   .catch(error => console.log(error))
 })
 
-// 瀏覽特定頁面
+// detail
 app.get('/expenses/:id', (req, res) => {
   const _id = req.params.id
   return Expense.findById(_id)
@@ -66,7 +66,7 @@ app.get('/expenses/:id', (req, res) => {
     .catch( error => console.log(error))
 })
 
-// 修改特定頁面資料
+// edit function
 app.get('/expenses/:id/edit', (req, res) => {
   const _id = req.params.id
   return Expense.findById(_id)
@@ -77,13 +77,22 @@ app.get('/expenses/:id/edit', (req, res) => {
 app.post('/expenses/:id/edit', (req, res) => {
   const _id = req.params.id
   const { name }= req.body
-  Expense.findById(_id)
+  return Expense.findById(_id)
     .then( expense => {
       expense.name = name
       return  expense.save()
     })
       .then(() => res.redirect(`/expenses/${_id}`))
       .catch(error => console.log(error))
+})
+
+// delete
+app.post('/expenses/:id/delete', (req, res) => {
+  const _id = req.params.id
+  return Expense.findById(_id)
+    .then(expense => expense.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
 })
 
 // 設定 port 
