@@ -4,7 +4,8 @@ const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 
-const Expense = require('./models/expense') // 載入 Expense model
+
+const routes = require('./routes') // 會自動尋找底下的 index 總路由
 
 const app = express()
 const port = 3000
@@ -38,64 +39,11 @@ app.set('view engine', 'handlebars')
 // 所有路由都會先經過 app.use
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method')) // 設定每一筆請求都會透過 methodOverride 進行前置處理
+app.use(routes) // 將 request 導入路由器
 
-// 設定首頁路由
-app.get('/', (req, res) => {
-  Expense.find() // 取出 Expense model 裡的所有資料
-    .lean() // 把 MongoDB 的 Model 物件轉換成乾淨的 JS 資料陣列
-    .sort({ _id: 'asc' }) // 根據 _id 升冪排序
-    .then( expenses => res.render('index', { expenses })) // 將資料傳給 index 樣板
-    .catch(error => console.log(error)) // 錯誤處理
-})
 
-// create
-app.get('/expenses/new', (req, res) => {
-  return res.render('new')
-})
-app.post('/expenses', (req, res) => {
-  const expenseCreate = req.body // 從 req.body 拿出表單裡的資料
-  return Expense.create( expenseCreate ) // 存入資料庫
-  .then(() => res.redirect('/'))  // 新增完成後導回首頁
-  .catch(error => console.log(error))
-})
 
-// detail
-app.get('/expenses/:id', (req, res) => {
-  const _id = req.params.id
-  return Expense.findById(_id)
-    .lean()
-    .then(expense => res.render('detail', { expense }))
-    .catch( error => console.log(error))
-})
 
-// edit function
-app.get('/expenses/:id/edit', (req, res) => {
-  const _id = req.params.id
-  return Expense.findById(_id)
-    .lean()
-    .then(expense => res.render('edit', { expense}))
-    .catch(error => console.log(error))
-})
-app.put('/expenses/:id', (req, res) => {
-  const _id = req.params.id
-  const { name }= req.body
-  return Expense.findById(_id)
-    .then( expense => {
-      expense.name = name
-      return  expense.save()
-    })
-      .then(() => res.redirect(`/expenses/${_id}`))
-      .catch(error => console.log(error))
-})
-
-// delete
-app.delete('/expenses/:id', (req, res) => {
-  const _id = req.params.id
-  return Expense.findById(_id)
-    .then(expense => expense.remove())
-    .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
-})
 
 // 設定 port 
 app.listen(port, () => {
