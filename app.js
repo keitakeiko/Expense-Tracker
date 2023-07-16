@@ -2,6 +2,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+const methodOverride = require('method-override')
 
 const Expense = require('./models/expense') // 載入 Expense model
 
@@ -36,7 +37,7 @@ app.set('view engine', 'handlebars')
 
 // 所有路由都會先經過 app.use
 app.use(express.urlencoded({ extended: true }))
-
+app.use(methodOverride('_method')) // 設定每一筆請求都會透過 methodOverride 進行前置處理
 
 // 設定首頁路由
 app.get('/', (req, res) => {
@@ -75,7 +76,7 @@ app.get('/expenses/:id/edit', (req, res) => {
     .then(expense => res.render('edit', { expense}))
     .catch(error => console.log(error))
 })
-app.post('/expenses/:id/edit', (req, res) => {
+app.put('/expenses/:id', (req, res) => {
   const _id = req.params.id
   const { name }= req.body
   return Expense.findById(_id)
@@ -88,7 +89,7 @@ app.post('/expenses/:id/edit', (req, res) => {
 })
 
 // delete
-app.post('/expenses/:id/delete', (req, res) => {
+app.delete('/expenses/:id', (req, res) => {
   const _id = req.params.id
   return Expense.findById(_id)
     .then(expense => expense.remove())
