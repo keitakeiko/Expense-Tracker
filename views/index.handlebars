@@ -1,13 +1,87 @@
-<a href="/expenses/new">Create</a>
-<ul>
-  {{#each expenses}}
-    <li>
-      {{ this.name }}
-      <a href="/expenses/{{ this._id }}">detail</a>
-      <a href="/expenses/{{ this._id }}/edit">edit</a>
-      <form action="/expenses/{{ this._id }}?_method=DELETE" method="POST" style="display:inline">
-        <button type="submit">delete</button>
+<div class="container my-3 mx-auto">
+  <div class="col-12 col-md-10 mx-auto"> ,
+    <div class="filter">
+      <form action="/">
+        <div class="input-group mb-3">
+          <select class="custom-select mr-5" name="viewByMonth" onchange="this.form.submit()">
+            <option selected disabled hidden>選擇月份</option>
+            <option value="">全部月份</option>
+            
+          </select>
+
+          <select class="custom-select" name="viewByCategory" onchange="this.form.submit()">
+            <option selected disabled hidden>選擇類別</option>
+            <option value="">全部類別</option>
+            
+          </select>
+        </div>
       </form>
-    </li>
-  {{/each}}
-</ul>
+    </div>
+
+
+    <div class="total-expense my-2">
+      <div class="row">
+        <div class="col-5 total-expense-title">
+          <p>Total Expense</p>
+        </div>
+        <div class="col-7 total-expense-num">
+          <p> total_expense</p>
+        </div>
+        <div id="myDiv"></div>
+      </div>
+    </div>
+
+    <div class="expense-table">
+      <table class="table table-striped">
+        <colgroup>
+          <col class="col-md-1">
+          <col class="col-md-5">
+          <col class="col-md-2">
+          <col class="col-md-4">
+        </colgroup>
+
+        <tbody>
+          
+          <tr>
+            <td class="text-center align-middle">icon</td>
+
+            <td>
+              <div class="category-name d-flex flex-column">
+                <div class="category">
+                  <b>categoryName</b>
+                  <span>merchant</span>
+                </div>
+                <div class="date mt-0">
+                  date
+                </div>
+              </div>
+            </td>
+
+            <td class="text-center align-middle">expense</td>
+            
+            <td class="text-center align-middle">
+              <div class="buttons ml-5">
+                <a class="btn btn-primary btn-sm ml-2" href=""><b
+                    class="align-middle">修改</b></a>
+                <a href="" class="btn btn-primary btn-sm ml-2"><b>刪除</b></a>
+              </div>
+
+            </td>
+          </tr>
+    </div>
+    
+    
+    </tbody>
+    </table>
+  </div>
+  <div class="new-expense d-flex justify-content-center mt-5">
+    <a class="btn btn-primary btn-lg" href="">新增支出</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+      
