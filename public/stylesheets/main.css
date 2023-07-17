@@ -1,3 +1,6 @@
+body {
+  background: #D3E2F2;
+}
 
 .lead {
   font-family: 'Caveat', cursive;
@@ -10,4 +13,87 @@
   font-family: 'Caveat', cursive;
   font-weight: bold;
   color: rgb(100, 98, 98)
+}
+
+.form-title {
+  font-size: 40px;
+  margin: 20px 0 40px 0;
+}
+
+.form-group label {
+  font-size: 21px;
+}
+
+td {
+  background-color: #F2C94C ;
+}
+
+.navbar-brand {
+  margin-left: 10px;
+  font-size: 30px;
+  padding: 0;
+}
+
+.total-expense-title {
+  font-size: 60px;
+  text-align: center;
+}
+
+.total-expense-num {
+  color: #A2B5CD;
+  font-size: 60px;
+  text-align: center;
+}
+
+.fa-lg,
+.fa-2x {
+  color: #A2B5CD;
+}
+
+.date {
+  font-size: 14px;
+}
+
+.record-buttons {
+  font-size: 16px;
+}
+
+.btn-primary,
+.btn-primary:visited,
+.btn-primary:focus {
+  background-color: #A2B5CD;
+  border-color: #A2B5CD;
+  margin: 2px 0;
+  transition: all 0.4s;
+  line-height: normal;
+  min-width: 60px;
+  min-height: 35px;
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+  background-color: hsl(216, 21%, 80.4%) !important;
+  border-color: hsl(216, 21%, 80.4%) !important;
+}
+
+
+.btn-info,
+.btn-info:visited,
+.btn-info:focus {
+  background-color: #A2B5CD;
+  border-color: #A2B5CD;
+}
+
+.btn-info:hover,
+.btn-info:active {
+  background-color: hsl(205, 38.3%, 36.9%);
+  border-color: hsl(205, 38.3%, 36.9%);
+}
+
+
+
+@media screen and (max-width: 992px) {
+  .container {
+    max-width: 600px;
+  }
 }

@@ -1,5 +1,5 @@
 <div class="container my-3 mx-auto">
-  <div class="col-12 col-md-10 mx-auto"> ,
+  <div class="col-12 col-md-10 mx-auto">
     <div class="filter">
       <form action="/">
         <div class="input-group mb-3">
@@ -18,64 +18,66 @@
       </form>
     </div>
 
-
+    
     <div class="total-expense my-2">
       <div class="row">
         <div class="col-5 total-expense-title">
           <p>Total Expense</p>
         </div>
         <div class="col-7 total-expense-num">
-          <p> total_expense</p>
+          <p class="test">Total Expense</p>
         </div>
         <div id="myDiv"></div>
       </div>
     </div>
 
-    <div class="expense-table">
-      <table class="table table-striped">
-        <colgroup>
-          <col class="col-md-1">
-          <col class="col-md-5">
-          <col class="col-md-2">
-          <col class="col-md-4">
-        </colgroup>
+    {{#each expenses}}
+      <div class="expense-table">
+        <table class="table table-striped">
+          <colgroup>
+            <col class="col-md-1">
+            <col class="col-md-5">
+            <col class="col-md-2">
+            <col class="col-md-4">
+          </colgroup>
 
-        <tbody>
-          
-          <tr>
-            <td class="text-center align-middle">icon</td>
-
-            <td>
-              <div class="category-name d-flex flex-column">
-                <div class="category">
-                  <b>categoryName</b>
-                  <span>merchant</span>
-                </div>
-                <div class="date mt-0">
-                  date
-                </div>
-              </div>
-            </td>
-
-            <td class="text-center align-middle">expense</td>
+          <tbody>
             
-            <td class="text-center align-middle">
-              <div class="buttons ml-5">
-                <a class="btn btn-primary btn-sm ml-2" href=""><b
-                    class="align-middle">修改</b></a>
-                <a href="" class="btn btn-primary btn-sm ml-2"><b>刪除</b></a>
-              </div>
+            <tr>
+              <td class="text-center align-middle">icon</td>
 
-            </td>
-          </tr>
-    </div>
-    
+              <td>
+                <div class="category-name d-flex flex-column">
+                  <div class="category">
+                    <b>categoryName</b>
+                    <span>merchant</span>
+                  </div>
+                  <div class="date mt-0">
+                    date
+                  </div>
+                </div>
+              </td>
+
+              <td class="text-center align-middle" id="ddd">expense</td>
+              
+              <td class="text-center align-middle">
+                <div class="buttons ml-5">
+                  <a class="btn btn-primary btn-sm ml-2" href="/expenses/{{ this._id }}"><b
+                      class="record-buttons align-middle">修改</b></a>
+                  <a href="/expenses/{{this._id}}?_method=DELETE" class="btn btn-primary btn-sm record-buttons ml-2" onclick="return confirm(`確定刪除 {{ this.name }} ? `)"><b>刪除</b></a>
+                </div>
+
+              </td>
+            </tr>
+      </div>
+      
+    {{/each}}
     
     </tbody>
     </table>
   </div>
   <div class="new-expense d-flex justify-content-center mt-5">
-    <a class="btn btn-primary btn-lg" href="">新增支出</a>
+    <a class="btn btn-primary" href="">新增支出</a>
   </div>
 </div>
 </div>

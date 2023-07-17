@@ -1,0 +1,35 @@
+{
+  "results": [
+    {
+      "name": "香奈兒",
+      "date": "2023-07-17",
+      "category": "entertainment",
+      "amount": "100000"
+    },
+    {
+      "name": "房租",
+      "date": "2023-07-17",
+      "category": "household",
+      "amount": "20000"
+    },
+    {
+      "name": "衣服",
+      "date": "2023-07-17",
+      "category": "entertainment",
+      "merchant": "cocoDeal",
+      "amount": "3000"
+    },
+    {
+      "name": "悠遊卡充值",
+      "date": "2023-07-17",
+      "category": "transport",
+      "amount": "400"
+    },
+    {
+      "name": "公車",
+      "date": "2023-07-17",
+      "category": "transport",
+      "amount": "56"
+    }
+  ]
+}
