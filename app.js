@@ -5,12 +5,14 @@ const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 const flash = require('connect-flash')
 
+// 載入設定檔，要寫在 express-session 以後
+const usePassport = require('./config/passport')
 const routes = require('./routes') // 會自動尋找底下的 index 總路由
-
+require('./config/mongoose')
 
 const app = express()
 const port = 3000
-require('./config/mongoose')
+
 
 // 建立樣版引擎
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
@@ -22,11 +24,13 @@ app.set('view engine', 'handlebars')
 app.use(session({
   secret: 'rockFish',
   resave: false,
-  daveUninitialized: true
+  saveUninitialized: true
 }))
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method')) // 設定每一筆請求都會透過 methodOverride 進行前置處理
+// 呼叫 Passport 函式並傳入 app，這條要寫在路由之前
+usePassport(app)
 app.use(routes) // 將 request 導入路由器
 
 
