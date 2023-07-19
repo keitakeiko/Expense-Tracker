@@ -6,13 +6,22 @@
           <select class="custom-select mr-5" name="viewByMonth" onchange="this.form.submit()">
             <option selected disabled hidden>選擇月份</option>
             <option value="">全部月份</option>
+            {{#each month}}
+              <option value="{{this}}" {{#isEqual this ../viewByMonth}} selected {{/isEqual}}>
+                {{this}}
+              </option>
+            {{/each}}
             
           </select>
 
           <select class="custom-select" name="viewByCategory" onchange="this.form.submit()">
             <option selected disabled hidden>選擇類別</option>
             <option value="">全部類別</option>
-            
+              {{#each category}}
+                <option value="{{this.name}}" {{#isEqual this.name ../viewByCategory}} selected {{/isEqual}}>
+                  {{this.label}}
+                </option>
+              {{/each}}
           </select>
         </div>
       </form>
@@ -25,7 +34,7 @@
           <p>Total Expense</p>
         </div>
         <div class="col-7 total-expense-num">
-          <p class="test">Total Expense</p>
+          <p> {{total_expense}}</p>
         </div>
         <div id="myDiv"></div>
       </div>
@@ -42,23 +51,23 @@
           </colgroup>
 
           <tbody>
-            
+            {{#each records}}
             <tr>
-              <td class="text-center align-middle">icon</td>
-
+              <td class="text-center align-middle">{{{this.category_icon}}}</td>
+                
               <td>
                 <div class="category-name d-flex flex-column">
                   <div class="category">
-                    <b>categoryName</b>
-                    <span>merchant</span>
+                    <b>{{this.name}}</b>
+                    <span>{{this.merchant}}</span>
                   </div>
                   <div class="date mt-0">
-                    date
+                    {{this.date}}
                   </div>
                 </div>
               </td>
-
-              <td class="text-center align-middle" id="ddd">expense</td>
+    
+              <td class="text-center align-middle record-amount">{{this.amount}}</td>
               
               <td class="text-center align-middle">
                 <div class="buttons ml-5">

@@ -1,7 +1,10 @@
 // 引用 express 與 express 路由器
 const express = require('express') 
 const router = express.Router()
+
+
 const Expense = require('../../models/expense') // 載入 Expense model
+
 
 // create
 router.get('/new', (req, res) => {

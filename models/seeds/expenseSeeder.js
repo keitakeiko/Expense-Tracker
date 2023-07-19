@@ -11,10 +11,10 @@ if (process.env.NODE_ENV !== 'production') {
 
 // 連線成功
 db.once('open', async () =>{
-    const categoryList = await Category.find().lean()
+    const categoryList = await Category.find().lean() // DB　find
     // console.log(categoryList)
     expenseList.forEach( expense => { 
-      expense.categoryId = categoryList.find(category => category.name === expense.category)._id
+      expense.categoryId = categoryList.find(category => category.name === expense.category)._id // JS find
     })
     await Expense.create(expenseList)
   console.log('done')

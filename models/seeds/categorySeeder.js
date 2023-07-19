@@ -36,7 +36,7 @@ const category =
 
 // 連線成功
 db.once('open', () =>{
-  Category.create(category)
+  Category.create(category) // 可放 array. object
     .then(() => {
       console.log('category seeder done!')
     })
