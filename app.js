@@ -1,5 +1,6 @@
 // 載入 express 並建構應用程式伺服器
 const express = require('express')
+const session = require('express-session')
 const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 const flash = require('connect-flash')
@@ -18,6 +19,11 @@ app.set('view engine', 'handlebars')
 
 
 // 所有路由都會先經過 app.use
+app.use(session({
+  secret: 'rockFish',
+  resave: false,
+  daveUninitialized: true
+}))
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method')) // 設定每一筆請求都會透過 methodOverride 進行前置處理

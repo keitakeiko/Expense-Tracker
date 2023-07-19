@@ -19,17 +19,17 @@ const expenseSchema = new Schema({
     type: Number,
     
   },
-  // userId: { // 加入關聯設定
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'User',
-  //   index: true,
-  //   required: true
-  // },
+  userId: { // 加入關聯設定
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    index: true,
+    // required: true
+  },
   categoryId: { // 加入關聯設定
     type: Schema.Types.ObjectId,
     ref: 'Category',
     index: true,
-    required: true
+    // required: true
   },
   createdAt: {
     type: Date,

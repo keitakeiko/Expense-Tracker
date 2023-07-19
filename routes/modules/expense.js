@@ -4,27 +4,23 @@ const router = express.Router()
 
 
 const Expense = require('../../models/expense') // 載入 Expense model
-
+const Category = require('../../models/category') // 載入 Category model
 
 // create
-router.get('/new', (req, res) => {
-  return res.render('new')
+router.get('/new', async (req, res) => {
+  const category =  await Category.find().lean()
+  return res.render('new', { category })
 })
 router.post('/', (req, res) => {
-  const expenseCreate = req.body // 從 req.body 拿出表單裡的資料
-  return Expense.create( expenseCreate ) // 存入資料庫
+  // const userId = req.user._id
+  const categoryId = req.category
+  console.log(categoryId)
+  const { name, date, category, merchant, amount } = req.body // 從 req.body 拿出表單裡的資料
+  return Expense.create({ name, date, category, merchant, amount, categoryId }) // 存入資料庫
   .then(() => res.redirect('/'))  // 新增完成後導回首頁
   .catch(error => console.log(error))
 })
 
-// detail
-router.get('/:id', (req, res) => {
-  const _id = req.params.id
-  return Expense.findById(_id)
-    .lean()
-    .then(expense => res.render('detail', { expense }))
-    .catch( error => console.log(error))
-})
 
 // edit function
 router.get('/:id/edit', (req, res) => {
