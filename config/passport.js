@@ -8,10 +8,10 @@ module.exports = app => {
   app.use(passport.session())
 
   // 設定本地登入策略
-  passport.use(new LocalStrategy({ userNameField: 'email'}, (email, password ,done) => {
-    user.findOne({ email })
+  passport.use(new LocalStrategy({ usernameField: 'email'}, (email, password ,done) => {
+    User.findOne({ email })
       .then( user => {
-        if (!user) {
+        if (!user) {        
           return done(null, false, { message: 'This email is not registered!' })
         }
         if (user.password !== password) {

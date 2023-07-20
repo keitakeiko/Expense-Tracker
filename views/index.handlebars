@@ -4,7 +4,7 @@
       <form action="/">
         <div class="input-group mb-3">
           <select class="custom-select mr-5" name="viewByMonth" onchange="this.form.submit()">
-            <option selected disabled hidden>選擇月份</option>
+            <option hidden>選擇月份</option>
             <option value="">全部月份</option>
             {{#each month}}
               <option value="{{this}}" {{#isEqual this ../viewByMonth}} selected {{/isEqual}}>
@@ -51,7 +51,6 @@
           </colgroup>
 
           <tbody>
-            {{#each records}}
             <tr>
               <td class="text-center align-middle">{{{this.category_icon}}}</td>
                 
@@ -78,12 +77,13 @@
 
               </td>
             </tr>
+          </tbody>
+        </table>
       </div>
       
     {{/each}}
     
-    </tbody>
-    </table>
+    
   </div>
   <div class="new-expense d-flex justify-content-center mt-5">
     <a class="btn btn-primary" href="">新增支出</a>
