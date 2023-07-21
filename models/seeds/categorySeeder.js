@@ -39,5 +39,6 @@ db.once('open', () =>{
   Category.create(category) // 可放 array. object
     .then(() => {
       console.log('category seeder done!')
+      process.exit()
     })
 })

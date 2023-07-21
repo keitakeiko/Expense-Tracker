@@ -5,10 +5,6 @@ const expenseSchema = new Schema({
     type: String,
     required: true
   },
-  category: {
-    type: String,
-    required: true
-  },
   date: {
     type: Date,
   },
@@ -23,13 +19,13 @@ const expenseSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
     index: true,
-    // required: true
+    required: true
   },
   categoryId: { // 加入關聯設定
     type: Schema.Types.ObjectId,
     ref: 'Category',
     index: true,
-    // required: true
+    required: true
   },
   createdAt: {
     type: Date,

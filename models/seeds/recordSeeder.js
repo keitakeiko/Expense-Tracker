@@ -16,6 +16,7 @@ db.once('open', async () =>{
     expenseList.forEach( expense => { 
       expense.categoryId = categoryList.find(category => category.name === expense.category)._id // JS find
     })
+    console.log(expenseList)
     await Expense.create(expenseList)
   console.log('done')
   process.exit()

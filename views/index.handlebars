@@ -1,28 +1,17 @@
 <div class="container my-3 mx-auto">
   <div class="col-12 col-md-10 mx-auto">
     <div class="filter">
-      <form action="/">
+      <form action="/"> 
+       {{!-- 沒有指定 method 預設為 GET --}}
         <div class="input-group mb-3">
-          <select class="custom-select mr-5" name="viewByMonth" onchange="this.form.submit()">
-            <option hidden>選擇月份</option>
-            <option value="">全部月份</option>
-            {{#each month}}
-              <option value="{{this}}" {{#isEqual this ../viewByMonth}} selected {{/isEqual}}>
-                {{this}}
+        <select class="custom-select" name="categoryId" onchange="this.form.submit()">
+          <option hidden>選擇類別</option>
+          <option value="All">全部類別</option>
+            {{#each category}}
+              <option value="{{this._id}}" {{#isEqual this._id ../categoryId}}selected{{/isEqual}}>
+                {{this.name}}
               </option>
             {{/each}}
-            
-          </select>
-
-          <select class="custom-select" name="viewByCategory" onchange="this.form.submit()">
-            <option selected disabled hidden>選擇類別</option>
-            <option value="">全部類別</option>
-              {{#each category}}
-                <option value="{{this.name}}" {{#isEqual this.name ../viewByCategory}} selected {{/isEqual}}>
-                  {{this.label}}
-                </option>
-              {{/each}}
-          </select>
         </div>
       </form>
     </div>
@@ -86,7 +75,7 @@
     
   </div>
   <div class="new-expense d-flex justify-content-center mt-5">
-    <a class="btn btn-primary" href="">新增支出</a>
+    <a class="btn btn-primary" href="/expenses/new">新增支出</a>
   </div>
 </div>
 

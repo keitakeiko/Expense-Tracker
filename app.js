@@ -8,6 +8,7 @@ const flash = require('connect-flash')
 // 載入設定檔，要寫在 express-session 以後
 const usePassport = require('./config/passport')
 const routes = require('./routes') // 會自動尋找底下的 index 總路由
+const handlebarsHelper = require('./helpers/handlebar-helpers')
 require('./config/mongoose')
 
 const app = express()
@@ -15,7 +16,7 @@ const port = 3000
 
 
 // 建立樣版引擎
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.engine('handlebars', exphbs({ defaultLayout: 'main', helpers: handlebarsHelper }))
 // 啟用樣版引擎
 app.set('view engine', 'handlebars')
 
