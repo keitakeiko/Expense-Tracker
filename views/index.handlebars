@@ -4,17 +4,25 @@
       <form action="/"> 
        {{!-- 沒有指定 method 預設為 GET --}}
         <div class="input-group mb-3">
-        <select class="custom-select" name="categoryId" onchange="this.form.submit()">
-          <option hidden>選擇類別</option>
-          <option value="All">全部類別</option>
-            {{#each category}}
-              <option value="{{this._id}}" {{#isEqual this._id ../categoryId}}selected{{/isEqual}}>
-                {{this.name}}
-              </option>
+          <select class="custom-select mr-5" name="viewByMonth" onchange="this.form.submit()">
+            <option selected disabled hidden>選擇月份</option>
+            <option value="">全部月份</option>
+            {{#each month}}
+            <option value="{{this}}" {{#isEqual this ../viewByMonth}} selected {{/isEqual}}>{{this}}</option>
             {{/each}}
-        </div>
-      </form>
-    </div>
+          </select>
+
+          <select class="custom-select" name="categoryId" onchange="this.form.submit()">
+            <option hidden>選擇類別</option>
+            <option value="All">全部類別</option>
+              {{#each category}}
+                <option value="{{this.name}}" {{#isEqual this.name ../viewByCategory}}selected{{/isEqual}}>
+                  {{this.name}}
+                </option>
+              {{/each}}
+          </div>
+        </form>
+      </div>
 
     
     <div class="total-expense my-2">
