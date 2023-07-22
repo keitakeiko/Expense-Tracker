@@ -12,27 +12,27 @@ const category =
  [{
     'name': 'household',
     'label': '家居物業',
-    'icon': '<i class="fas fa-home fa-lg"></i>'
+    'icon': 'fas fa-home fa-lg'
   },
   {
     'name': 'transport',
     'label': '交通出行',
-    'icon': '<i class="fas fa-shuttle-van fa-lg"></i>'
+    'icon': 'fas fa-shuttle-van fa-lg'
   },
   {
     'name': 'entertainment',
     'label': '休閒娛樂',
-    'icon': '<i class="fas fa-grin-beam fa-lg"></i>'
+    'icon': 'fas fa-grin-beam fa-lg'
   },
   {
     'name': 'food',
     'label': '餐飲食品',
-    'icon': '<i class="fas fa-utensils fa-lg"></i>'
+    'icon': 'fas fa-utensils fa-lg'
   },
   {
     'name': 'others',
     'label': '其他',
-    'icon': '<i class="fas fa-pen fa-lg"></i>'
+    'icon': 'fas fa-pen fa-lg'
   }]
 
 // 連線成功

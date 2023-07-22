@@ -5,7 +5,7 @@
        {{!-- 沒有指定 method 預設為 GET --}}
         <div class="input-group mb-3">
           <select class="custom-select mr-5" name="viewByMonth" onchange="this.form.submit()">
-            <option selected disabled hidden>選擇月份</option>
+            <option value="" hidden>選擇月份</option>
             <option value="">全部月份</option>
             {{#each month}}
             <option value="{{this}}" {{#isEqual this ../viewByMonth}} selected {{/isEqual}}>{{this}}</option>
@@ -13,16 +13,17 @@
           </select>
 
           <select class="custom-select" name="categoryId" onchange="this.form.submit()">
-            <option hidden>選擇類別</option>
-            <option value="All">全部類別</option>
+            <option value="" hidden>選擇類別</option>
+            <option value="">全部類別</option>
               {{#each category}}
-                <option value="{{this.name}}" {{#isEqual this.name ../viewByCategory}}selected{{/isEqual}}>
+                <option value="{{this._id}}" {{#isEqual this._id ../categoryId}}selected{{/isEqual}}>
                   {{this.name}}
                 </option>
               {{/each}}
-          </div>
-        </form>
-      </div>
+          </select>
+        </div>
+      </form>
+    </div>
 
     
     <div class="total-expense my-2">
@@ -37,7 +38,7 @@
       </div>
     </div>
 
-    {{#each expenses}}
+    {{#each records}}
       <div class="expense-table">
         <table class="table table-striped">
           <colgroup>
@@ -49,7 +50,7 @@
 
           <tbody>
             <tr>
-              <td class="text-center align-middle">{{{this.category_icon}}}</td>
+              <td class="text-center align-middle"><i class="{{this.category_icon}}"></i></td>
                 
               <td>
                 <div class="category-name d-flex flex-column">
@@ -67,9 +68,12 @@
               
               <td class="text-center align-middle">
                 <div class="buttons ml-5">
-                  <a class="btn btn-primary btn-sm ml-2" href="/expenses/{{ this._id }}"><b
+                  <a class="btn btn-primary btn-sm ml-2" href="/expenses/{{ this._id }}/edit"><b
                       class="record-buttons align-middle">修改</b></a>
-                  <a href="/expenses/{{this._id}}?_method=DELETE" class="btn btn-primary btn-sm record-buttons ml-2" onclick="return confirm(`確定刪除 {{ this.name }} ? `)"><b>刪除</b></a>
+
+                  <form action="/expenses/{{this._id}}?_method=DELETE" method="POST">
+                    <button class="btn btn-primary btn-sm record-buttons ml-2" style="display: inline" type="submit" onclick="return confirm(`確定刪除 {{ this.name }} ? `)">刪除</button>
+                  </form>
                 </div>
 
               </td>
@@ -77,14 +81,13 @@
           </tbody>
         </table>
       </div>
-      
     {{/each}}
-    
-    
   </div>
+
   <div class="new-expense d-flex justify-content-center mt-5">
     <a class="btn btn-primary" href="/expenses/new">新增支出</a>
   </div>
+  
 </div>
 
 
