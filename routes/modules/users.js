@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const User = require('../../models/user')
 const passport = require('passport') // 引用 passport
+const bcrypt = require('bcryptjs')
 
 // login
 router.get('/login', (req, res) => {

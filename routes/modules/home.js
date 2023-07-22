@@ -17,8 +17,6 @@ router.get('/', async(req, res) => {
     .lean() // 把 MongoDB 的 Model 物件轉換成乾淨的 JS 資料陣列
     .sort({ _id: 'asc' }) // 根據 _id 升冪排序
     .then( expenses => {
-      console.log(expenses)
-      console.log(category)
       res.render('index', { expenses, category, categoryId })}) // 將資料傳給 index 樣板
     
     
