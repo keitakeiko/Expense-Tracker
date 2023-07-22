@@ -12,7 +12,7 @@ const handlebarsHelper = require('./helpers/handlebar-helpers')
 require('./config/mongoose')
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 
 // 建立樣版引擎
